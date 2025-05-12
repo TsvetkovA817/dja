@@ -1,0 +1,64 @@
+{% extends 'calculator/base.html' %}
+{% block content %}
+
+    {% if recipe %}
+        <div class="dish-card">
+            <h2>{{ dish_name }}</h2>
+            {% if dish_desc %}<p>{{ dish_desc }}</p>{% endif %}
+
+            <div class="servings-form">
+                <form id="servingsForm">
+                    <label for="servings">Количество порций:</label>
+                    <input type="number" id="servings" name="servings"
+                           min="1" value="{{ servings }}" onchange="updateServings()">
+                </form>
+            </div>
+
+            <h3>Ингредиенты:</h3>
+            <ul>
+                {% for ingredient, amount in recipe.items %}
+                    <li>{{ ingredient }}: {{ amount }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    {% else %}
+
+        <h2>Наши рецепты</h2>
+        <div class="dishes-list">
+        {% for dish_key, dish_info in dishes_page.object_list %}
+            <div class="dish-card">
+                <h3><a href="{% url 'recipe' dish=dish_key %}">{{ dish_info.name }}</a></h3>
+                <p>{{ dish_info.desc }}</p>
+            </div>
+        {% endfor %}
+        </div>
+
+    <div class="pagination">
+        {% if dishes_page.has_previous %}
+            <a href="?page=1">&laquo; первая</a>
+            <a href="?page={{ dishes_page.previous_page_number }}">предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ dishes_page.number }} из {{ dishes_page.paginator.num_pages }}
+        </span>
+
+        {% if dishes_page.has_next %}
+            <a href="?page={{ dishes_page.next_page_number }}">следующая</a>
+            <a href="?page={{ dishes_page.paginator.num_pages }}">последняя &raquo;</a>
+        {% endif %}
+    </div>
+
+
+
+    {% endif %}
+
+        <script>
+            function updateServings() {
+                const servings = document.getElementById('servings').value;
+                window.location.href = `?servings=${servings}`;
+            }
+        </script>
+
+{% endblock %}
