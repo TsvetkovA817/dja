@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block meta %}
+    {{ block.super }}
+    <meta name="description" content="О нашем автосалоне ORM Car Showroom">
+    <meta property="og:title" content="О нас | ORM Car Showroom">
+{% endblock %}
+{% block title %}О нас | ORM Car showroom{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="mb-4">О нашем автосалоне</h1>
+                <p class="lead">ORM Car Showroom - это современный автомобильный салон со 100-летней историей.</p>
+                
+                <div class="row mt-5">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3><i class="fa fa-car"></i> Наш ассортимент</h3>
+                                <p>Более 200 автомобилей в наличии от эконом до премиум класса. Lorem ipsum dolor
+                                    sit amet, consectetur adipisicing elit. Distinctio explicabo facere facilis
+                                    hic libero perferendis porro quia temporibus veniam voluptatem?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3><i class="fa fa-users"></i> Наша команда</h3>
+                                <p>Профессиональные менеджеры с многолетним опытом работы. Lorem ipsum dolor
+                                    sit amet, consectetur adipisicing elit. Distinctio explicabo facere facilis
+                                    hic libero perferendis porro quia temporibus veniam voluptatem? </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3><i class="fa fa-certificate"></i> Наши преимущества</h3>
+                                <p>Гарантия на все автомобили, помощь с кредитованием и страхованием. Lorem ipsum dolor
+                                    sit amet, consectetur adipisicing elit. Distinctio explicabo facere facilis
+                                    hic libero perferendis porro quia temporibus veniam voluptatem?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

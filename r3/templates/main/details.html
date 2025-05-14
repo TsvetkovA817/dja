@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+    {{ block.super }}  <!--  общие мета из base.html -->
+    <meta name="description" content="Подробно об автомобиле {{ car.model }} {{ car.year }} года. Цена: {{ car.price }} руб.">
+    <meta property="og:title" content="{{ car.model }} {{ car.year }} | ORM Car Showroom Автосалон">
+    <meta property="og:description" content="Автомобиль {{ car.model }} {{ car.year }} года за {{ car.price }} руб.">
+    {% if car.image %}
+        <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ car.image.url }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+    {% endif %}
+{% endblock %}
+{% block title %}{{ car.model }}{% endblock title %}
+{% block content %}
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <div>
+<!--            <img src="{{ car.image.url }}" alt="" class="img-responsive wc-image">-->
+              <img src="{% if car.image %}{{ car.image.url }}{% else %}{% static 'images/default-car.jpg' %}{% endif %}" alt="" class="img-responsive wc-image">
+
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <h2>{{ car.model }}, {{ car.year }}</h2>
+          <p class="lead">Цена: <strong class="text-primary">{{ car.price | floatformat:"-2g" }} ₽</strong></p>
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <p>
+                <span>Модель</span>
+                <br>
+                <strong>{{ car.model }}</strong>
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <p>
+                <span>Год выпуска</span>
+                <br>
+                <strong>{{ car.year }}</strong>
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <p>
+                <span>Коробка передач</span>
+                <br>
+                <strong>{{ car.get_gearbox_display }}</strong>
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <p>
+                <span>Привод</span>
+                <br>
+                <strong>{{ car.get_drive_unit_display }}</strong>
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <p>
+                <span>Пробег</span>
+                <br>
+                <strong>{{ car.mileage }} км</strong>
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <p>
+                <span>Топливо</span>
+                <br>
+                <strong>{{ car.get_fuel_type_display }}</strong>
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <p>
+                <span>Объем двигателя</span>
+                <br>
+                <strong>{{ car.volume }} л</strong>
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <p>
+                <span>Кузов</span>
+                <br>
+                <strong>{{ car.get_body_type_display }}</strong>
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <p>
+                <span>Цвет</span>
+                <br>
+                <strong>{{ car.color }}</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <a href="{% url 'list' %}" class="btn btn-default"> Назад к списку  </a>
+        </div>
+    </div>
+    <br>
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <a href="{% url 'sales' car.id %}" class="btn btn-default"> Продажи  </a>
+        </div>
+    </div>
+
+  </section>
+
+{% endblock content %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Список авто{% endblock title %}
+
+{% block content %}
+	<section>
+		<div class="container">
+			<div class="text-center">
+				<h1>Список автомобилей</h1>
+				<br>
+				<div class="row">
+					<div class="col-lg-6 col-xs-12 col-lg-offset-3">
+						<div class="form">
+							<form action="{% url 'list' %}" method="get">
+								<div class="form-group">
+									<label class="control-label">Поиск авто</label>
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Mercedes ..." name="q">
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="submit">Найти!</button>
+										</span>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section-background">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-xs-12">
+
+					<div class="row">
+						{% for car in page_obj %}
+							<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="courses-thumb courses-thumb-secondary">
+								<div class="courses-top">
+									<div class="courses-image">
+<!--	если нет картинки здесь err	<img src="{{ car.image.url }}" class="img-responsive" alt="">-->
+ 										<img src="{% if car.image %}{{ car.image.url }}{% else %}{% static 'images/default-car.jpg' %}{% endif %}" class="img-responsive" alt="">
+									</div>
+								</div>
+
+								<div class="courses-detail">
+<!--	здесь исправлена ссылка	-->
+									<h3><a href="{% url 'details' car.id %}">{{ car.model }}</a></h3>
+									<p class="lead">Цена: <strong>{{ car.price | floatformat:"-2g" }} ₽</strong></p>
+									<p>{{ car.volume }} л. &nbsp;&nbsp;/&nbsp;&nbsp; {{ car.get_fuel_type_display }} &nbsp;&nbsp;/&nbsp;&nbsp; {{ car.year }} &nbsp;&nbsp;/&nbsp;&nbsp;
+										{{ car.get_gearbox_display }}</p>
+								</div>
+
+								<div class="courses-info">
+									<a href="{% url 'details' car.id %}" class="section-btn btn btn-primary btn-block">Подробнее</a>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+
+				</div>
+			</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<ul class="pagination">
+
+									{% if page_obj.has_previous %}
+										<li><a href="?page=1{% if search_query %}&q={{ search_query }}{% endif %}">&laquo;</a></li>
+										<li><a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">‹</a></li>
+									{% endif %}
+
+									{% for num in page_obj.paginator.page_range %}
+										{% if page_obj.number == num %}
+											<li class="active"><a href="#">{{ num }}</a></li>
+										{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+											<li><a href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}">{{ num }}</a></li>
+										{% endif %}
+									{% endfor %}
+
+									{% if page_obj.has_next %}
+										<li><a href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">›</a></li>
+										<li><a href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&q={{ search_query }}{% endif %}">&raquo;</a></li>
+									{% endif %}
+
+								</ul>
+							</div>
+						</div>
+		</div>
+	</section>
+
+{% endblock content %}

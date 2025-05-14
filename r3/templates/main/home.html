@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная | ORM Car showroom{% endblock %}
+
+{% block content %}
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Автосалон ORM Car Showroom</h1>
+        <p class="lead text-muted">Лучшие автомобили по лучшим ценам.</p>
+        <p>
+            <a href="{% url 'list' %}" class="btn btn-primary my-2">Посмотреть каталог</a>
+            <a href="{% url 'contacts' %}" class="btn btn-secondary my-2">Связаться с нами</a>
+        </p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Широкий выбор</h5>
+                    <p class="card-text">Более 200 автомобилей в наличии. Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Distinctio explicabo facere facilis hic libero perferendis porro quia
+                        temporibus veniam voluptatem?</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Гарантия качества</h5>
+                    <p class="card-text">Все автомобили проходят проверку. Lorem ipsum dolor sit amet,
+                        consectetur adipisicing elit. Distinctio explicabo facere facilis hic libero perferendis
+                        porro quia temporibus veniam voluptatem?</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Индивидуальный подход</h5>
+                    <p class="card-text">Подберем авто по вашим требованиям. Lorem ipsum dolor sit amet,
+                        consectetur adipisicing elit. Distinctio explicabo facere facilis hic libero perferendis
+                        porro quia temporibus veniam voluptatem?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

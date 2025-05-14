@@ -1,0 +1,21 @@
+/* Стили для футера */
+footer a {
+    color: #adb5bd;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+footer ul li {
+    color: #adb5bd;
+    margin-bottom: 0.5rem;
+}
+
+footer h5 {
+    color: white;
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+}

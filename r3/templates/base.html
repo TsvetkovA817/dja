@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+
+<head>
+	<title>{% block title %}ORM Car showroom{% endblock title %}</title>
+
+    <!-- общие -->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- для страниц -->
+    {% block meta %}
+        <!-- Дефолтные мета-теги (если не переопределены в дочерних шаблонах) -->
+        <meta name="description" content="Автосалон ORM Car - новые и подержанные автомобили">
+        <meta property="og:title" content="ORM Car Showroom">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}">
+    	<meta name="keywords" content="">
+    	<meta name="author" content="">
+    {% endblock %}
+
+<!--	<meta name="description" content="">  -->
+
+    <!--  favicon -->
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <link rel="apple-touch-icon" href="{% static 'icon.png' %}">
+
+    <!-- CSS -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+</head>
+
+
+<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+<!-- главное меню -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Заголовок и кнопка для мобильных -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'home' %}">ORM Car Showroom</a>
+    </div>
+
+    <!-- Основное меню -->
+    <div class="collapse navbar-collapse" id="navbar-main">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+          <a href="{% url 'home' %}" style="padding-left: 25px; padding-right: 25px;">Главная</a>
+        </li>
+        <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+          <a href="{% url 'about' %}" style="padding-left: 25px; padding-right: 25px;">О нас</a>
+        </li>
+        <li class="{% if request.resolver_match.url_name == 'contacts' %}active{% endif %}">
+          <a href="{% url 'contacts' %}" style="padding-left: 25px; padding-right: 25px;">Контакты</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+	{% block content %}
+	{% endblock content %}
+
+<!--	<footer id="footer">-->
+<!--     <div class="container">-->
+<!--     </div>-->
+<!--	</footer>-->
+
+<!-- футер -->
+<footer class="bg-dark text-white py-5">
+    <div class="container">
+        <div class="row">
+            <!-- 1 колонка -->
+            <div class="col-md-6 mb-4">
+                <h5>ORM Car Showroom</h5>
+                <p class="text-muted">Лучшие автомобили по лучшим ценам с 1900 года</p>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-map-marker mr-2"></i> г. Автобаденбург, ул. Транспортная, 123</li>
+                    <li><i class="fa fa-phone mr-2"></i> +7 (495) 123-45-67</li>
+                    <li><i class="fa fa-envelope mr-2"></i> info@orm-car.test</li>
+                </ul>
+            </div>
+            <!-- 2 колонка с меню -->
+            <div class="col-md-3 mb-4">
+                <h5>Меню</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-white">Главная</a></li>
+                    <li><a href="{% url 'list' %}" class="text-white">Каталог авто</a></li>
+                    <li><a href="{% url 'about' %}" class="text-white">О компании</a></li>
+                </ul>
+            </div>
+            <!-- 3 колонка с меню -->
+            <div class="col-md-3 mb-4">
+                <h5>Информация</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'contacts' %}" class="text-white">Контакты</a></li>
+                    <li><a href="#" class="text-white">Условия продажи</a></li>
+                    <li><a href="#" class="text-white">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="bg-secondary">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="mb-0">&copy; {% now "Y" %} ORM Car Showroom Автосалон. Все права защищены.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/smoothscroll.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>
